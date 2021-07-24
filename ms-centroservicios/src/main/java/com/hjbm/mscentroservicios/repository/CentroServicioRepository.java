@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CentroServicioRepository extends JpaRepository<CentroServicio, Long> {
 
-    @Query("SELECT c FROM CentroServicio WHERE c.nombre=?1 AND Empresa.id=?2")
+    @Query("SELECT c FROM CentroServicio c WHERE c.nombre=?1 AND c.idEmpresa=?2")
     Optional<CentroServicio> findByNombreAndEmpresa(String nombre, Integer idEmpresa);
 }

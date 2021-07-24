@@ -44,7 +44,7 @@ public class CentroServicioService {
     public CentroServicio obtenerCentroServicioById(Long idCentroServicio) {
 
         Optional<CentroServicio> c = centroServicioRepository.findById(idCentroServicio);
-        c.get().setEmpresa(empresaClient.getEmpresa(c.get().getIdEmpresa()).get());
+        //c.get().setEmpresa(empresaClient.getEmpresa(c.get().getIdEmpresa()).get());
         c.get().setEstado(new Estado(1,"Activo","activo"));
         return c.get();
     }
