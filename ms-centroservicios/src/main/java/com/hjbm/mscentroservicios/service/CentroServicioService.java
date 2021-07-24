@@ -1,6 +1,5 @@
 package com.hjbm.mscentroservicios.service;
 
-import com.hjbm.mscentroservicios.client.EmpresaClient;
 import com.hjbm.mscentroservicios.model.Estado;
 import com.hjbm.mscentroservicios.entity.CentroServicio;
 import com.hjbm.mscentroservicios.repository.CentroServicioRepository;
@@ -19,14 +18,11 @@ import java.util.stream.Collectors;
 public class CentroServicioService {
 
     private final CentroServicioRepository centroServicioRepository;
-    private final EmpresaClient empresaClient;
 
     @Autowired
-    public CentroServicioService(CentroServicioRepository centroServicioRepository,
-                                 EmpresaClient empresaClient) {
+    public CentroServicioService(CentroServicioRepository centroServicioRepository) {
 
         this.centroServicioRepository = centroServicioRepository;
-        this.empresaClient = empresaClient;
     }
 
     public List<CentroServicio> obtenerCentroServicios() {
