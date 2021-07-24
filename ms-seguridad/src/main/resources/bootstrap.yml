@@ -10,7 +10,3 @@ spring:
     admin:
       client:
         url: http://localhost:8086
-
-server:
-  error:
-    include-message: always
