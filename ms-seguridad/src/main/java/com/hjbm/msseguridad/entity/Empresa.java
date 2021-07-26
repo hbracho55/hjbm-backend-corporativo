@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 @Entity(name = "Empresa")
 @Table(name = "empresa")

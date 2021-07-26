@@ -1,32 +1,25 @@
 package com.hjbm.mscentroservicios.client;
 
 import com.hjbm.mscentroservicios.model.Empresa;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-/*
+
 @FeignClient(name = "servicio-seguridad")
-@RequestMapping(path = "empresa")*/
+@RequestMapping(path = "empresas")
 public interface EmpresaClient {
-/*
+
     @GetMapping
-    public List<Empresa> getEmpresas();
+    public ResponseEntity<List<Empresa>> getEmpresas();
 
     @GetMapping(path = "/{id}")
-    public Optional<Empresa> getEmpresa(Integer idEmpresa);
+    public ResponseEntity<Empresa> getEmpresa(@PathVariable("id") Integer idEmpresa);
 
-    @PostMapping
-    public Empresa incluirEmpresa(@RequestBody Empresa empresa);
 
-    @DeleteMapping(path = "{idEmpresa}")
-    public void eliminarEmpresa(@PathVariable("idEmpresa") Integer idEmpresa);
-
-    @PutMapping(path = "{idEmpresa}")
-    public void actualizarEmpresa(@PathVariable("idEmpresa") Integer idEmpresa,
-                                  @RequestParam String nombre,
-                                  @RequestParam(required = false) String descripcion,
-                                  @RequestParam(required = false) String iniciales);
-
-*/
 }
 

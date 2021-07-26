@@ -45,4 +45,5 @@ public class Atencion {
 
     @Column(name = "id_centro_servicio")
     private Long idCentroServicio;
+
 }

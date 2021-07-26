@@ -6,14 +6,12 @@ import com.hjbm.msseguridad.entity.Empresa;
 import com.hjbm.msseguridad.exception.MensajeError;
 import com.hjbm.msseguridad.service.EmpresaService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -36,6 +34,7 @@ public class EmpresaController {
 
         List empresas = new ArrayList<>();
         empresas = empresaService.obtenerEmpresas();
+        System.out.println("empresas: "+empresas);
         if (empresas.isEmpty()){
             return ResponseEntity.notFound().build();
         }

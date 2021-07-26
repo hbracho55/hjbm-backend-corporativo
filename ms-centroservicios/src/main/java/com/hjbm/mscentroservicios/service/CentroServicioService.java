@@ -1,5 +1,7 @@
 package com.hjbm.mscentroservicios.service;
 
+import com.hjbm.mscentroservicios.client.EmpresaClient;
+import com.hjbm.mscentroservicios.model.Empresa;
 import com.hjbm.mscentroservicios.model.Estado;
 import com.hjbm.mscentroservicios.entity.CentroServicio;
 import com.hjbm.mscentroservicios.repository.CentroServicioRepository;
@@ -18,31 +20,32 @@ import java.util.stream.Collectors;
 public class CentroServicioService {
 
     private final CentroServicioRepository centroServicioRepository;
+    private final EmpresaClient empresaClient;
 
     @Autowired
-    public CentroServicioService(CentroServicioRepository centroServicioRepository) {
-
+    public CentroServicioService(CentroServicioRepository centroServicioRepository,
+                                 EmpresaClient empresaClient) {
         this.centroServicioRepository = centroServicioRepository;
+        this.empresaClient = empresaClient;
     }
 
     public List<CentroServicio> obtenerCentroServicios() {
 
         List<CentroServicio> lista=centroServicioRepository.findAll();
-/*
-        return lista.stream().map(c ->
-                        c.setEmpresa(empresaClient.getEmpresa(c.getIdEmpresa()).get())
-                ).collect(Collectors.toList());
-*/
-        return lista;
 
+        return lista.stream().map(centro -> {
+                    Empresa empresa = empresaClient.getEmpresa(centro.getIdEmpresa()).getBody();
+                    centro.setEmpresa(empresa);
+                    return centro;
+                }).collect(Collectors.toList());
     }
 
-    public CentroServicio obtenerCentroServicioById(Long idCentroServicio) {
+    public Optional<CentroServicio> obtenerCentroServicioById(Long idCentroServicio) {
 
-        Optional<CentroServicio> c = centroServicioRepository.findById(idCentroServicio);
-        //c.get().setEmpresa(empresaClient.getEmpresa(c.get().getIdEmpresa()).get());
-        c.get().setEstado(new Estado(1,"Activo","activo"));
-        return c.get();
+        Optional<CentroServicio> centro = centroServicioRepository.findById(idCentroServicio);
+        centro.get().setEmpresa(empresaClient.getEmpresa(centro.get().getIdEmpresa()).getBody());
+        centro.get().setEstado(new Estado(1,"Activo","activo"));
+        return centro;
     }
 
     public CentroServicio registrarCentroServicio(
@@ -72,7 +75,9 @@ public class CentroServicioService {
     public CentroServicio actualizarCentroServicio(
             Long idCentroServicio,
             String nombre,
-            String descripcion) {
+            String descripcion,
+            String iniciales,
+            Integer idEstado) {
 
         CentroServicio centroServicio = centroServicioRepository.findById(idCentroServicio)
                 .orElseThrow(() ->

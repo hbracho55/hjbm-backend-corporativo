@@ -31,6 +31,7 @@ public class EmpresaService {
     public List<Empresa> obtenerEmpresas() {
 
         return empresaRepository.findAll();
+
     }
 
     public Optional<Empresa> obtenerEmpresaPorId(Integer idEmpresa) {

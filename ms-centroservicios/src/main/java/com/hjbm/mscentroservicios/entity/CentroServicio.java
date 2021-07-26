@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +30,8 @@ public class CentroServicio {
             generator = "centro_servicio_sequence"
     )
     private Long id;
+
+    //@NotBlank
     private String nombre;
     private String descripcion;
 
